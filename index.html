@@ -2,10 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>Undangan Pernikahan — Dika &amp; Milla</title>
-<meta name="description" content="The Wedding of Dika & Milla — Minggu, 15 November 2026, Ende, NTT. Undangan 3D interaktif.">
-<meta name="theme-color" content="#6e1f2a">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Undangan Pernikahan — Dika & Milla</title>
+<meta name="description" content="The Wedding of Dika & Milla — Minggu, 15 November 2026, Ende, NTT.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -13,255 +12,12 @@
 </head>
 <body class="locked">
 
-<!-- ====================================================== -->
-<!-- 3D STAGE                                                -->
-<!-- ====================================================== -->
-<div class="world" id="world">
-  <div class="stage" id="stage">
-
-    <!-- ===== persistent set/diorama layers (back -> front) ===== -->
-    <div class="layer set-backdrop" data-depth="-280"></div>   <!-- pelaminan.png -->
-    <div class="layer set-swagtop" data-depth="-150"></div>    <!-- swag bunga atas -->
-    <div class="layer set-side set-side--l" data-depth="-70"></div> <!-- border mawar kiri -->
-    <div class="layer set-side set-side--r" data-depth="-70"></div> <!-- border mawar kanan -->
-    <div class="layer set-rosesframe" data-depth="-20"></div>       <!-- bingkai mawar di belakang kartu -->
-
-    <!-- ===== the swapping content cards ===== -->
-    <div class="deck" id="deck">
-
-      <!-- 0 · PEMBUKA -->
-      <section class="scene" data-label="Pembuka">
-        <div class="card">
-          <p class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
-          <span class="eyebrow">Assalamu'alaikum Wr. Wb.</span>
-          <p class="lead">Dengan memohon rahmat dan ridho Allah Subhanahu wa Ta'ala, kami bermaksud menyelenggarakan acara pernikahan putra-putri kami.</p>
-          <div class="orn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 2.4 3 3.5 5.5 3.7C15.4 7 14.3 8.8 14 11.2c2.4-1.2 4.2-1.2 6 0-1.8 1.2-3.6 1.2-6 0 .3 2.4 1.4 4.2 3.5 5.5-2.5.2-4.3 1.3-5.5 3.7-1.2-2.4-3-3.5-5.5-3.7 2.1-1.3 3.2-3.1 3.5-5.5-2.4 1.2-4.2 1.2-6 0 1.8-1.2 3.6-1.2 6 0C9.7 8.8 8.6 7 6.5 5.7 9 5.5 10.8 4.4 12 2Z"/></svg>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2 · AYAT -->
-      <section class="scene" data-label="Ayat Suci">
-        <div class="card card--scroll">
-          <span class="eyebrow">Firman Allah SWT</span>
-          <p class="arabic">يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُوا۟ رَبَّكُمُ ٱلَّذِى خَلَقَكُم مِّن نَّفْسٍ وَٰحِدَةٍ وَخَلَقَ مِنْهَا زَوْجَهَا وَبَثَّ مِنْهُمَا رِجَالًا كَثِيرًا وَنِسَآءً</p>
-          <p class="translate">"Wahai manusia! Bertakwalah kepada Tuhanmu yang telah menciptakan kamu dari diri yang satu (Adam), dan (Allah) menciptakan pasangannya (Hawa) dari (diri)-nya; dan dari keduanya Allah memperkembangbiakkan laki-laki dan perempuan yang banyak."</p>
-          <span class="ref">QS. An-Nisa : 1</span>
-        </div>
-      </section>
-
-      <!-- 3 · MEMPELAI -->
-      <section class="scene" data-label="Mempelai">
-        <div class="card card--scroll">
-          <span class="eyebrow">Bismillahirrahmanirrahim</span>
-          <h2 class="s-title">Kedua <em>Mempelai</em></h2>
-          <div class="couple">
-            <div class="person">
-              <div class="pframe"><div class="pframe__win ph"><img src="photos/milla.jpg" alt="Foto Milla" onerror="this.parentNode.classList.add('ph--empty')"></div><span class="pframe__deco"></span></div>
-              <p class="person__name">Milla</p>
-              <p class="person__full">Jamilah</p>
-              <p class="person__role">Mempelai Wanita</p>
-              <p class="person__parents">Putri dari<br><b>Bapak [Nama Ayah]</b> &amp; <b>Ibu [Nama Ibu]</b></p>
-            </div>
-            <div class="amp-orn">&amp;</div>
-            <div class="person">
-              <div class="pframe"><div class="pframe__win ph"><img src="photos/dika.jpg" alt="Foto Dika" onerror="this.parentNode.classList.add('ph--empty')"></div><span class="pframe__deco"></span></div>
-              <p class="person__name">Dika</p>
-              <p class="person__full">Dika Putra Gumay</p>
-              <p class="person__role">Mempelai Pria</p>
-              <p class="person__parents">Putra dari<br><b>Bapak [Nama Ayah]</b> &amp; <b>Ibu [Nama Ibu]</b></p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4 · ACARA -->
-      <section class="scene" data-label="Akad &amp; Resepsi">
-        <div class="card card--scroll">
-          <span class="eyebrow">Save The Date</span>
-          <h2 class="s-title">Akad &amp; <em>Resepsi</em></h2>
-          <div class="events">
-            <div class="ev">
-              <div class="ev__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 9v12h16V9l-8-6Z"/><path d="M9 21v-6h6v6"/></svg></div>
-              <h3 class="ev__name">Akad Nikah</h3>
-              <p class="ev__date">Minggu, 15 November 2026</p>
-              <p class="ev__time-big">Pukul 09.00 – 11.00 WITA</p>
-              <p class="ev__addr"><b>Kediaman Bapak Ahmad Abue</b><br>Jl. Raya Ende-Bajawa, Kec. Ende Utara, Kab. Ende, NTT</p>
-            </div>
-            <div class="ev">
-              <div class="ev__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V8a4 4 0 0 1 8 0v13"/><path d="M4 21h16"/><path d="M12 2v2"/><path d="M9 12h6"/></svg></div>
-              <h3 class="ev__name">Resepsi</h3>
-              <p class="ev__date">Minggu, 15 November 2026</p>
-              <p class="ev__time-big">Pukul 11.00 WITA s/d Selesai</p>
-              <p class="ev__addr"><b>Gedung Graha Ristela</b><br>Jl. El Tari, Kel. Mautapaga, Kec. Ende Timur, Kab. Ende, NTT</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5 · COUNTDOWN -->
-      <section class="scene" data-label="Hitung Mundur">
-        <div class="card card--accent">
-          <span class="eyebrow">Menuju Hari Bahagia</span>
-          <h2 class="s-title">Counting <em>the days</em></h2>
-          <div class="cd-grid" id="cdGrid">
-            <div class="cd-cell"><div class="cd-num" id="cdD">00</div><div class="cd-lbl">Hari</div></div>
-            <div class="cd-cell"><div class="cd-num" id="cdH">00</div><div class="cd-lbl">Jam</div></div>
-            <div class="cd-cell"><div class="cd-num" id="cdM">00</div><div class="cd-lbl">Menit</div></div>
-            <div class="cd-cell"><div class="cd-num" id="cdS">00</div><div class="cd-lbl">Detik</div></div>
-          </div>
-          <div class="cd-done hide" id="cdDone">Alhamdulillah, hari bahagia telah tiba.</div>
-          <a class="btn btn--ghost" id="calBtn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-            Simpan ke Kalender
-          </a>
-        </div>
-      </section>
-
-      <!-- 6 · LOKASI -->
-      <section class="scene" data-label="Lokasi">
-        <div class="card card--scroll">
-          <span class="eyebrow">Lokasi Acara</span>
-          <h2 class="s-title">Denah <em>Lokasi</em></h2>
-          <div class="map-wrap">
-            <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Gedung+Graha+Ristela+Jl+El+Tari+Mautapaga+Ende&output=embed"></iframe>
-          </div>
-          <div class="map-actions">
-            <a class="btn btn--primary btn--block" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gedung+Graha+Ristela+Jl+El+Tari+Mautapaga+Ende+Timur+NTT">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Lokasi Resepsi — Graha Ristela
-            </a>
-            <a class="btn btn--ghost btn--block" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jl+Raya+Ende+Bajawa+Ende+Utara+NTT">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Lokasi Akad — Ende Utara
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <!-- 7 · GALERI -->
-      <section class="scene" data-label="Galeri">
-        <div class="card card--scroll">
-          <span class="eyebrow">Our Moments</span>
-          <h2 class="s-title">Galeri <em>Kami</em></h2>
-          <div class="gallery">
-            <div class="frame frame--sm g-tall"><div class="ph"><img src="photos/gallery-1.jpg" alt="Galeri 1" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-            <div class="frame frame--sm g-tall"><div class="ph"><img src="photos/gallery-2.jpg" alt="Galeri 2" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-            <div class="frame frame--sm g-third"><div class="ph"><img src="photos/gallery-3.jpg" alt="Galeri 3" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-            <div class="frame frame--sm g-third"><div class="ph"><img src="photos/gallery-4.jpg" alt="Galeri 4" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-            <div class="frame frame--sm g-third"><div class="ph"><img src="photos/gallery-5.jpg" alt="Galeri 5" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-            <div class="frame frame--sm g-wide"><div class="ph"><img src="photos/gallery-6.jpg" alt="Galeri 6" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 8 · RSVP -->
-      <section class="scene" data-label="RSVP">
-        <div class="card card--scroll">
-          <span class="eyebrow">Konfirmasi Kehadiran</span>
-          <h2 class="s-title">RSVP</h2>
-          <form class="form" id="rsvpForm">
-            <div class="field">
-              <label for="rNama">Nama Anda</label>
-              <input type="text" id="rNama" name="nama" placeholder="Nama lengkap" required>
-            </div>
-            <div class="field">
-              <label>Apakah Anda akan hadir?</label>
-              <div class="choice">
-                <label><input type="radio" name="hadir" value="Hadir" required><span>Hadir</span></label>
-                <label><input type="radio" name="hadir" value="Ragu-ragu"><span>Ragu-ragu</span></label>
-                <label><input type="radio" name="hadir" value="Berhalangan"><span>Berhalangan</span></label>
-              </div>
-            </div>
-            <div class="field">
-              <label for="rJml">Jumlah tamu</label>
-              <select id="rJml" name="jumlah">
-                <option value="1">1 orang</option>
-                <option value="2">2 orang</option>
-                <option value="3">3 orang</option>
-                <option value="4">4 orang</option>
-                <option value="5">5 orang atau lebih</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="rPesan">Ucapan &amp; doa (opsional)</label>
-              <textarea id="rPesan" name="pesan" placeholder="Tuliskan ucapan dan doa restu Anda…"></textarea>
-            </div>
-            <button type="submit" class="btn btn--primary btn--block">Kirim Konfirmasi</button>
-          </form>
-          <div class="rsvp-done hide" id="rsvpDone">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-            <h3>Terima kasih, <span id="doneName">Tamu</span>!</h3>
-            <p id="doneMsg">Konfirmasi Anda sudah kami terima. Sampai jumpa di hari bahagia kami.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 9 · AMPLOP -->
-      <section class="scene" data-label="Amplop Digital">
-        <div class="card card--scroll">
-          <span class="eyebrow">Tanda Kasih</span>
-          <h2 class="s-title">Amplop <em>Digital</em></h2>
-          <p class="gift-note">Doa restu Anda adalah hadiah terindah. Bila ingin memberi tanda kasih, kami menyediakan amplop digital berikut.</p>
-          <div class="gift-cards">
-            <div class="gift">
-              <div class="gift__top"><span class="gift__bank">Bank BRI</span><span class="gift__tag">Rekening</span></div>
-              <p class="gift__no">0123 4567 8901 2345</p>
-              <p class="gift__name">a.n. Dika Putra Gumay</p>
-              <button class="btn btn--ghost btn--block copy-btn" data-copy="0123456789012345">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Salin Nomor Rekening
-              </button>
-            </div>
-            <div class="gift">
-              <div class="gift__top"><span class="gift__bank">DANA / OVO</span><span class="gift__tag">E-Wallet</span></div>
-              <p class="gift__no">0812 3456 7890</p>
-              <p class="gift__name">a.n. Jamilah</p>
-              <button class="btn btn--ghost btn--block copy-btn" data-copy="081234567890">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                Salin Nomor
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 10 · PENUTUP -->
-      <section class="scene" data-label="Penutup">
-        <div class="card card--scroll">
-          <span class="eyebrow">Terima Kasih</span>
-          <p class="lead">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
-          <p class="salam">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
-          <p class="closing__sign">Milla &amp; Dika</p>
-          <p class="closing__fam">Keluarga Besar Bapak Ahmad Abue<br>&amp; Keluarga Besar Bapak Gumay</p>
-          <div class="orn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 2.4 3 3.5 5.5 3.7C15.4 7 14.3 8.8 14 11.2c2.4-1.2 4.2-1.2 6 0-1.8 1.2-3.6 1.2-6 0 .3 2.4 1.4 4.2 3.5 5.5-2.5.2-4.3 1.3-5.5 3.7-1.2-2.4-3-3.5-5.5-3.7 2.1-1.3 3.2-3.1 3.5-5.5-2.4 1.2-4.2 1.2-6 0 1.8-1.2 3.6-1.2 6 0C9.7 8.8 8.6 7 6.5 5.7 9 5.5 10.8 4.4 12 2Z"/></svg>
-          </div>
-        </div>
-      </section>
-
-    </div><!-- /deck -->
-
-    <!-- ===== foreground floral clusters (bertumpuk = ramai) ===== -->
-    <div class="layer set-corner set-corner--bl" data-depth="70"></div>  <!-- buket peony kiri bawah -->
-    <div class="layer set-corner set-corner--br" data-depth="70"></div>  <!-- gardenia kanan bawah -->
-    <div class="layer set-corner set-corner--tl" data-depth="110"></div> <!-- bunga sudut kiri atas -->
-    <div class="layer set-corner set-corner--tr" data-depth="110"></div> <!-- bunga sudut kanan atas -->
-
-    <!-- ===== gorden depan (tiang + tirai) ===== -->
-    <div class="layer set-gorden" data-depth="165"></div>
-
-  </div><!-- /stage -->
-</div><!-- /world -->
-
-<!-- ====================================================== -->
-<!-- COVER (overlay 2D di atas panggung)                     -->
-<!-- ====================================================== -->
-<div class="cover" id="cover">
-  <div class="cover__floral cover__floral--top"></div>
-  <div class="cover__floral cover__floral--bottom"></div>
+<!-- ====================== COVER ====================== -->
+<section class="cover" id="cover" data-screen-label="Sampul">
+  <div class="cover__pelaminan"></div>
+  <div class="floral floral--arch"></div>
+  <div class="floral floral--bl"></div>
+  <div class="floral floral--br"></div>
   <div class="cover__inner">
     <span class="cover__eyebrow">The Wedding Of</span>
     <h1 class="cover__names">Milla<span class="cover__amp">&amp;</span>Dika</h1>
@@ -275,25 +31,234 @@
       Buka Undangan
     </button>
   </div>
-</div>
+</section>
 
-<!-- petals overlay -->
-<div class="petals" id="petals" aria-hidden="true"></div>
+<!-- ====================== INVITATION ====================== -->
+<main class="invitation" id="invitation">
 
-<!-- navigation -->
-<nav class="nav" id="nav" aria-label="Navigasi undangan">
-  <button class="nav__arrow" id="prevBtn" aria-label="Sebelumnya">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-  </button>
-  <div class="nav__dots" id="dots"></div>
-  <button class="nav__arrow" id="nextBtn" aria-label="Berikutnya">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-  </button>
-</nav>
+  <!-- PEMBUKA -->
+  <section class="section section--tight" data-screen-label="Pembuka">
+    <div class="floral floral--top"></div>
+    <p class="bismillah reveal">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+    <span class="eyebrow reveal">Assalamu'alaikum Wr. Wb.</span>
+    <p class="lead reveal d1">Dengan memohon rahmat dan ridho Allah Subhanahu wa Ta'ala, kami bermaksud menyelenggarakan acara pernikahan putra-putri kami.</p>
+    <div class="orn reveal d2">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 2.4 3 3.5 5.5 3.7C15.4 7 14.3 8.8 14 11.2c2.4-1.2 4.2-1.2 6 0-1.8 1.2-3.6 1.2-6 0 .3 2.4 1.4 4.2 3.5 5.5-2.5.2-4.3 1.3-5.5 3.7-1.2-2.4-3-3.5-5.5-3.7 2.1-1.3 3.2-3.1 3.5-5.5-2.4 1.2-4.2 1.2-6 0 1.8-1.2 3.6-1.2 6 0C9.7 8.8 8.6 7 6.5 5.7 9 5.5 10.8 4.4 12 2Z"/></svg>
+    </div>
+  </section>
 
-<!-- scene label + swipe hint -->
-<div class="scene-tag" id="sceneTag"></div>
-<div class="hint" id="hint">geser / gunakan panah untuk berpindah</div>
+  <!-- AYAT -->
+  <section class="section ayat" data-screen-label="Ayat Suci">
+    <p class="arabic reveal">يَٰٓأَيُّهَا ٱلنَّاسُ ٱتَّقُوا۟ رَبَّكُمُ ٱلَّذِى خَلَقَكُم مِّن نَّفْسٍ وَٰحِدَةٍ وَخَلَقَ مِنْهَا زَوْجَهَا وَبَثَّ مِنْهُمَا رِجَالًا كَثِيرًا وَنِسَآءً ۚ وَٱتَّقُوا۟ ٱللَّهَ ٱلَّذِى تَسَآءَلُونَ بِهِۦ وَٱلْأَرْحَامَ ۚ إِنَّ ٱللَّهَ كَانَ عَلَيْكُمْ رَقِيبًا</p>
+    <p class="translate reveal d1">"Wahai manusia! Bertakwalah kepada Tuhanmu yang telah menciptakan kamu dari diri yang satu (Adam), dan (Allah) menciptakan pasangannya (Hawa) dari (diri)-nya; dan dari keduanya Allah memperkembangbiakkan laki-laki dan perempuan yang banyak. Bertakwalah kepada Allah yang dengan nama-Nya kamu saling meminta, dan (peliharalah) hubungan kekeluargaan. Sesungguhnya Allah selalu menjaga dan mengawasimu."</p>
+    <span class="ref reveal d2">QS. An-Nisa : 1</span>
+  </section>
+
+  <!-- MEMPELAI -->
+  <section class="section" data-screen-label="Mempelai">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Bismillahirrahmanirrahim</span>
+    <h2 class="s-title reveal">Kedua <em>Mempelai</em></h2>
+    <div class="couple">
+      <div class="person reveal d1">
+        <div class="pframe"><div class="pframe__win"><img src="photos/milla.jpg" alt="Foto Milla" onerror="this.parentNode.classList.add('pframe__win--empty')"></div><span class="pframe__deco"></span></div>
+        <div>
+          <p class="person__name">Milla</p>
+          <p class="person__full">Jamilah</p>
+          <p class="person__role">Mempelai Wanita</p>
+          <p class="person__parents">Putri dari<br><b>Bapak [Nama Ayah]</b> &amp; <b>Ibu [Nama Ibu]</b></p>
+        </div>
+      </div>
+
+      <div class="amp-orn reveal d1">&amp;</div>
+
+      <div class="person reveal d2">
+        <div class="pframe"><div class="pframe__win"><img src="photos/dika.jpg" alt="Foto Dika" onerror="this.parentNode.classList.add('pframe__win--empty')"></div><span class="pframe__deco"></span></div>
+        <div>
+          <p class="person__name">Dika</p>
+          <p class="person__full">Dika Putra Gumay</p>
+          <p class="person__role">Mempelai Pria</p>
+          <p class="person__parents">Putra dari<br><b>Bapak [Nama Ayah]</b> &amp; <b>Ibu [Nama Ibu]</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACARA -->
+  <section class="section ayat" data-screen-label="Akad & Resepsi">
+    <span class="eyebrow reveal">Save The Date</span>
+    <h2 class="s-title reveal">Akad &amp; <em>Resepsi</em></h2>
+    <div class="events">
+      <div class="ev reveal d1">
+        <div class="ev__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 9v12h16V9l-8-6Z"/><path d="M9 21v-6h6v6"/></svg></div>
+        <h3 class="ev__name">Akad Nikah</h3>
+        <p class="ev__date">Minggu, 15 November 2026</p>
+        <p class="ev__time-big">Pukul 09.00 – 11.00 WITA</p>
+        <p class="ev__addr"><b>Kediaman Bapak Ahmad Abue</b><br>Jl. Raya Ende-Bajawa, Kec. Ende Utara, Kab. Ende, Nusa Tenggara Timur</p>
+      </div>
+      <div class="ev reveal d2">
+        <div class="ev__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21V8a4 4 0 0 1 8 0v13"/><path d="M4 21h16"/><path d="M12 2v2"/><path d="M9 12h6"/></svg></div>
+        <h3 class="ev__name">Resepsi</h3>
+        <p class="ev__date">Minggu, 15 November 2026</p>
+        <p class="ev__time-big">Pukul 11.00 WITA s/d Selesai</p>
+        <p class="ev__addr"><b>Gedung Graha Ristela</b><br>Jl. El Tari, Kel. Mautapaga, Kec. Ende Timur, Kab. Ende, Nusa Tenggara Timur</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section class="section countdown" data-screen-label="Hitung Mundur">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Menuju Hari Bahagia</span>
+    <h2 class="s-title reveal">Counting <em>the days</em></h2>
+    <div class="cd-grid reveal d1" id="cdGrid">
+      <div class="cd-cell"><div class="cd-num" id="cdD">00</div><div class="cd-lbl">Hari</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cdH">00</div><div class="cd-lbl">Jam</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cdM">00</div><div class="cd-lbl">Menit</div></div>
+      <div class="cd-cell"><div class="cd-num" id="cdS">00</div><div class="cd-lbl">Detik</div></div>
+    </div>
+    <div class="cd-done hide" id="cdDone">Alhamdulillah, hari bahagia telah tiba.</div>
+    <a class="btn btn--ghost reveal d2" id="calBtn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Simpan ke Kalender
+    </a>
+  </section>
+
+  <!-- LOKASI -->
+  <section class="section" data-screen-label="Lokasi">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Lokasi Acara</span>
+    <h2 class="s-title reveal">Denah <em>Lokasi</em></h2>
+    <p class="lead reveal d1">Resepsi diselenggarakan di Gedung Graha Ristela, Ende. Klik tombol di bawah untuk membuka rute.</p>
+    <div class="map-wrap reveal d1">
+      <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Gedung+Graha+Ristela+Jl+El+Tari+Mautapaga+Ende&output=embed"></iframe>
+    </div>
+    <div class="map-actions reveal d2">
+      <a class="btn btn--primary btn--block" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Gedung+Graha+Ristela+Jl+El+Tari+Mautapaga+Ende+Timur+NTT">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Lokasi Resepsi — Graha Ristela
+      </a>
+      <a class="btn btn--ghost btn--block" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jl+Raya+Ende+Bajawa+Ende+Utara+NTT">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        Lokasi Akad — Ende Utara
+      </a>
+    </div>
+  </section>
+
+  <!-- GALERI -->
+  <section class="section ayat" data-screen-label="Galeri">
+    <span class="eyebrow reveal">Our Moments</span>
+    <h2 class="s-title reveal">Galeri <em>Kami</em></h2>
+    <p class="lead reveal d1">Sebagian momen perjalanan kami.</p>
+    <div class="gallery reveal d1">
+      <div class="ph ph--gallery g-tall" data-label="Foto"><img src="photos/gallery-1.jpg" alt="Galeri 1" onerror="this.style.display='none'"></div>
+      <div class="ph ph--gallery g-tall" data-label="Foto"><img src="photos/gallery-2.jpg" alt="Galeri 2" onerror="this.style.display='none'"></div>
+      <div class="ph ph--gallery g-third" data-label="Foto"><img src="photos/gallery-3.jpg" alt="Galeri 3" onerror="this.style.display='none'"></div>
+      <div class="ph ph--gallery g-third" data-label="Foto"><img src="photos/gallery-4.jpg" alt="Galeri 4" onerror="this.style.display='none'"></div>
+      <div class="ph ph--gallery g-third" data-label="Foto"><img src="photos/gallery-5.jpg" alt="Galeri 5" onerror="this.style.display='none'"></div>
+      <div class="ph ph--gallery" style="grid-column:span 6;aspect-ratio:16/9" data-label="Foto"><img src="photos/gallery-6.jpg" alt="Galeri 6" onerror="this.style.display='none'"></div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section rsvp" data-screen-label="RSVP">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Konfirmasi Kehadiran</span>
+    <h2 class="s-title reveal">RSVP</h2>
+    <p class="lead reveal d1">Mohon konfirmasikan kehadiran Anda agar kami dapat mempersiapkan acara dengan sebaik-baiknya.</p>
+
+    <form class="form reveal d1" id="rsvpForm">
+      <div class="field">
+        <label for="rNama">Nama Anda</label>
+        <input type="text" id="rNama" name="nama" placeholder="Nama lengkap" required>
+      </div>
+      <div class="field">
+        <label>Apakah Anda akan hadir?</label>
+        <div class="choice">
+          <label><input type="radio" name="hadir" value="Hadir" required><span>Hadir</span></label>
+          <label><input type="radio" name="hadir" value="Ragu-ragu"><span>Ragu-ragu</span></label>
+          <label><input type="radio" name="hadir" value="Berhalangan"><span>Berhalangan</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label for="rJml">Jumlah tamu</label>
+        <select id="rJml" name="jumlah">
+          <option value="1">1 orang</option>
+          <option value="2">2 orang</option>
+          <option value="3">3 orang</option>
+          <option value="4">4 orang</option>
+          <option value="5">5 orang atau lebih</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rPesan">Ucapan &amp; doa (opsional)</label>
+        <textarea id="rPesan" name="pesan" placeholder="Tuliskan ucapan dan doa restu Anda…"></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary btn--block">Kirim Konfirmasi</button>
+    </form>
+
+    <div class="rsvp-done hide" id="rsvpDone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      <h3>Terima kasih, <span id="doneName">Tamu</span>!</h3>
+      <p id="doneMsg">Konfirmasi Anda sudah kami terima. Sampai jumpa di hari bahagia kami.</p>
+    </div>
+  </section>
+
+  <!-- AMPLOP / KADO -->
+  <section class="section" data-screen-label="Amplop Digital">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Tanda Kasih</span>
+    <h2 class="s-title reveal">Amplop <em>Digital</em></h2>
+    <p class="gift-note reveal d1">Doa restu Anda adalah hadiah terindah. Namun bila ingin memberi tanda kasih, kami menyediakan amplop digital berikut.</p>
+    <div class="gift-cards">
+      <div class="gift reveal d1">
+        <div class="gift__top">
+          <span class="gift__bank">Bank BRI</span>
+          <span class="gift__tag">Rekening</span>
+        </div>
+        <p class="gift__no" data-copy="0123456789012345">0123 4567 8901 2345</p>
+        <p class="gift__name">a.n. Dika Putra Gumay</p>
+        <button class="btn btn--ghost btn--block copy-btn" data-copy="0123456789012345">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Salin Nomor Rekening
+        </button>
+      </div>
+      <div class="gift reveal d2">
+        <div class="gift__top">
+          <span class="gift__bank">DANA / OVO</span>
+          <span class="gift__tag">E-Wallet</span>
+        </div>
+        <p class="gift__no" data-copy="081234567890">0812 3456 7890</p>
+        <p class="gift__name">a.n. Jamilah</p>
+        <button class="btn btn--ghost btn--block copy-btn" data-copy="081234567890">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Salin Nomor
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PENUTUP -->
+  <section class="section closing" data-screen-label="Penutup">
+    <div class="floral floral--top"></div>
+    <span class="eyebrow reveal">Terima Kasih</span>
+    <p class="lead reveal d1">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+    <p class="salam reveal d2">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+    <p class="closing__sign reveal d2">Milla &amp; Dika</p>
+    <p class="closing__fam reveal d2">Keluarga Besar Bapak Ahmad Abue<br>&amp; Keluarga Besar Bapak Gumay</p>
+    <div class="orn reveal d3">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 2.4 3 3.5 5.5 3.7C15.4 7 14.3 8.8 14 11.2c2.4-1.2 4.2-1.2 6 0-1.8 1.2-3.6 1.2-6 0 .3 2.4 1.4 4.2 3.5 5.5-2.5.2-4.3 1.3-5.5 3.7-1.2-2.4-3-3.5-5.5-3.7 2.1-1.3 3.2-3.1 3.5-5.5-2.4 1.2-4.2 1.2-6 0 1.8-1.2 3.6-1.2 6 0C9.7 8.8 8.6 7 6.5 5.7 9 5.5 10.8 4.4 12 2Z"/></svg>
+    </div>
+    <div class="floral floral--garden"></div>
+    <div style="height:170px"></div>
+  </section>
+
+  <footer class="footer">
+    <p class="footer__names">Milla &amp; Dika</p>
+    <p class="footer__meta">15 . 11 . 2026 — Ende, NTT</p>
+  </footer>
+</main>
 
 <!-- floating controls -->
 <div class="fab-wrap" id="fabs">
