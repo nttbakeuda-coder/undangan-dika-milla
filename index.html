@@ -20,20 +20,11 @@
   <div class="stage" id="stage">
 
     <!-- ===== persistent set/diorama layers (back -> front) ===== -->
-    <div class="layer backdrop" data-depth="-260">
-      <div class="bd-wall"></div>
-      <div class="bd-glow"></div>
-      <div class="bd-lights"></div>
-    </div>
-
-    <div class="layer greenery" data-depth="-180">
-      <div class="garland"></div>
-    </div>
-
-    <div class="layer pillars" data-depth="-90">
-      <div class="lamp lamp--l"></div>
-      <div class="lamp lamp--r"></div>
-    </div>
+    <div class="layer set-backdrop" data-depth="-280"></div>   <!-- pelaminan.png -->
+    <div class="layer set-swagtop" data-depth="-150"></div>    <!-- swag bunga atas -->
+    <div class="layer set-side set-side--l" data-depth="-70"></div> <!-- border mawar kiri -->
+    <div class="layer set-side set-side--r" data-depth="-70"></div> <!-- border mawar kanan -->
+    <div class="layer set-rosesframe" data-depth="-20"></div>       <!-- bingkai mawar di belakang kartu -->
 
     <!-- ===== the swapping content cards ===== -->
     <div class="deck" id="deck">
@@ -67,7 +58,7 @@
           <h2 class="s-title">Kedua <em>Mempelai</em></h2>
           <div class="couple">
             <div class="person">
-              <div class="frame"><div class="ph ph--person"><img src="photos/milla.jpg" alt="Foto Milla" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
+              <div class="pframe"><div class="pframe__win ph"><img src="photos/milla.jpg" alt="Foto Milla" onerror="this.parentNode.classList.add('ph--empty')"></div><span class="pframe__deco"></span></div>
               <p class="person__name">Milla</p>
               <p class="person__full">Jamilah</p>
               <p class="person__role">Mempelai Wanita</p>
@@ -75,7 +66,7 @@
             </div>
             <div class="amp-orn">&amp;</div>
             <div class="person">
-              <div class="frame"><div class="ph ph--person"><img src="photos/dika.jpg" alt="Foto Dika" onerror="this.parentNode.classList.add('ph--empty')"></div></div>
+              <div class="pframe"><div class="pframe__win ph"><img src="photos/dika.jpg" alt="Foto Dika" onerror="this.parentNode.classList.add('ph--empty')"></div><span class="pframe__deco"></span></div>
               <p class="person__name">Dika</p>
               <p class="person__full">Dika Putra Gumay</p>
               <p class="person__role">Mempelai Pria</p>
@@ -253,13 +244,14 @@
 
     </div><!-- /deck -->
 
-    <!-- ===== foreground frame layers (front-most) ===== -->
-    <div class="layer bouquet bouquet--l" data-depth="90"></div>
-    <div class="layer bouquet bouquet--r" data-depth="90"></div>
+    <!-- ===== foreground floral clusters (bertumpuk = ramai) ===== -->
+    <div class="layer set-corner set-corner--bl" data-depth="70"></div>  <!-- buket peony kiri bawah -->
+    <div class="layer set-corner set-corner--br" data-depth="70"></div>  <!-- gardenia kanan bawah -->
+    <div class="layer set-corner set-corner--tl" data-depth="110"></div> <!-- bunga sudut kiri atas -->
+    <div class="layer set-corner set-corner--tr" data-depth="110"></div> <!-- bunga sudut kanan atas -->
 
-    <div class="gorden gorden--l" data-depth="170"><span class="tassel"></span></div>
-    <div class="gorden gorden--r" data-depth="170"><span class="tassel"></span></div>
-    <div class="valance" data-depth="180"></div>
+    <!-- ===== gorden depan (tiang + tirai) ===== -->
+    <div class="layer set-gorden" data-depth="165"></div>
 
   </div><!-- /stage -->
 </div><!-- /world -->
