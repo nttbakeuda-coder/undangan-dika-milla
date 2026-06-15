@@ -49,13 +49,14 @@
   var dots = $$('.dot', dotsWrap);
 
   function placeScene(sc, off) {
-    var t, f = 'none';
-    if (off === 0) { t = 'translate3d(0,0,0) scale(1)'; }
-    else if (off > 0) { t = 'translate3d(0,0,' + (-470 * Math.min(off, 2)) + 'px) scale(.82)'; f = 'blur(3px)'; }
-    else { t = 'translate3d(0,0,260px) scale(1.18)'; f = 'blur(5px)'; }
+    // transisi bersih & elegan: cross-fade + geser halus (tanpa blur/zoom/terbang)
+    var t;
+    if (off === 0) t = 'translate3d(0,0,0)';
+    else if (off > 0) t = 'translate3d(0,34px,0)';   // berikutnya naik dari bawah
+    else t = 'translate3d(0,-34px,0)';               // sebelumnya turun dari atas
     sc.style.transform = t;
-    sc.style.filter = reduce ? 'none' : f;
-    sc.style.zIndex = (off === 0) ? 5 : (Math.abs(off) === 1 ? 3 : 1);
+    sc.style.filter = 'none';
+    sc.style.zIndex = (off === 0) ? 5 : 1;
   }
 
   function render() {
@@ -143,7 +144,7 @@
      ============================================================ */
   var stage = $('#stage');
   var tRX = 0, tRY = 0, cRX = 0, cRY = 0, rafOn = false;
-  var MAXP = 9; // derajat maks
+  var MAXP = 3.5; // derajat maks (lembut)
 
   function loop() {
     cRX += (tRX - cRX) * 0.08;

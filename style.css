@@ -135,7 +135,7 @@ body{
   transform-style:preserve-3d;
   pointer-events:none;
   opacity:0;
-  transition:transform .9s var(--ease), opacity .65s var(--ease), filter .9s var(--ease);
+  transition:transform .7s var(--ease), opacity .55s var(--ease);
   will-change:transform,opacity;
 }
 .scene.is-active{opacity:1;pointer-events:auto;}
