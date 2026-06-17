@@ -31,6 +31,12 @@
     cover.classList.add('open');
     document.body.classList.remove('locked');
     setTimeout(function () { cover.style.display = 'none'; }, 1100);
+    // izin giroskop (iOS perlu gesture) untuk parallax 3D
+    try {
+      if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission().catch(function () {});
+      }
+    } catch (e) {}
     // mulai musik (gesture pengguna -> diizinkan)
     tryPlayMusic();
     // tampilkan tombol mengambang
@@ -200,4 +206,57 @@
     for (var i = 0; i < 12; i++) spawnPetal();
     petalTimer = setInterval(spawnPetal, 1400);
   }
+
+  /* ---------------- Parallax 3D ringan ---------------- */
+  (function parallax() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    /* a) cover : lapisan bergerak beda kedalaman (pointer / giroskop) */
+    var pel = $('.cover__pelaminan'),
+        arch = $('.cover .floral--arch'),
+        bl = $('.cover .floral--bl'),
+        br = $('.cover .floral--br');
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = false;
+    function put(el, fx, fy) {
+      if (!el) return;
+      el.style.setProperty('--px', (cx * fx).toFixed(1) + 'px');
+      el.style.setProperty('--py', (cy * fy).toFixed(1) + 'px');
+    }
+    function loop() {
+      cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+      put(pel, 6, 4); put(arch, 12, 7); put(bl, 20, 13); put(br, 17, 11);
+      if (Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) requestAnimationFrame(loop);
+      else raf = false;
+    }
+    function kick() { if (!raf) { raf = true; requestAnimationFrame(loop); } }
+    window.addEventListener('pointermove', function (e) {
+      tx = (e.clientX / window.innerWidth - 0.5) * 2;
+      ty = (e.clientY / window.innerHeight - 0.5) * 2;
+      kick();
+    }, { passive: true });
+    window.addEventListener('deviceorientation', function (e) {
+      if (e.gamma == null || e.beta == null) return;
+      tx = Math.max(-1, Math.min(1, e.gamma / 28));
+      ty = Math.max(-1, Math.min(1, (e.beta - 45) / 28));
+      kick();
+    }, true);
+
+    /* b) scroll : swag bunga tiap section bergerak (efek berlapis/3D) */
+    var swags = $$('.floral--top'), sraf = false;
+    function onScroll() {
+      if (sraf) return; sraf = true;
+      requestAnimationFrame(function () {
+        var vh = window.innerHeight;
+        swags.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          var off = (r.top - vh * 0.5) / vh;
+          el.style.setProperty('--py', (off * -28).toFixed(1) + 'px');
+        });
+        sraf = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  })();
 })();

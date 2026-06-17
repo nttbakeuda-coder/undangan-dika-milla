@@ -340,24 +340,28 @@ body.locked{overflow:hidden;height:100vh;}
    ============================================================ */
 .floral{background-repeat:no-repeat;}
 
-/* swag mawar berulang di puncak tiap section (motif penyatu) */
-.floral--top{height:108px;opacity:.92;transform:none;
+/* swag mawar berulang di puncak tiap section (motif penyatu) + parallax scroll */
+.floral--top{height:108px;opacity:.92;transform:translate3d(0,var(--py,0px),0);will-change:transform;
   background:url('frames/border-mawar.png') top center / auto 108px no-repeat;
   -webkit-mask-image:none;mask-image:none;
   filter:drop-shadow(0 6px 10px rgba(0,0,0,.12));}
 
 /* ---------- COVER ---------- */
 .cover{background:radial-gradient(120% 85% at 50% 4%, #fff8f0, #f6e7d5 55%, #ecd4bd 100%);}
-.cover__pelaminan{position:absolute;left:50%;bottom:-1%;transform:translateX(-50%);
+.cover__pelaminan{position:absolute;left:50%;bottom:-1%;
+  transform:translateX(-50%) translate3d(var(--px,0px),var(--py,0px),0);will-change:transform;
   width:122%;max-width:580px;aspect-ratio:4336/4196;z-index:0;pointer-events:none;opacity:.45;
   background:url('frames/pelaminan.png') center bottom / contain no-repeat;
   -webkit-mask-image:linear-gradient(180deg,transparent 4%,#000 34%);mask-image:linear-gradient(180deg,transparent 4%,#000 34%);}
-.cover .floral--arch{height:208px;opacity:1;transform:none;z-index:1;
+.cover .floral--arch{height:208px;opacity:1;z-index:1;will-change:transform;
+  transform:translate3d(var(--px,0px),var(--py,0px),0);
   background:url('frames/border-mawar.png') top center / auto 208px no-repeat;
   -webkit-mask-image:none;mask-image:none;}
-.cover .floral--bl{bottom:0;left:0;right:auto;width:64%;height:248px;z-index:1;
+.cover .floral--bl{bottom:0;left:0;right:auto;width:64%;height:248px;z-index:1;will-change:transform;
+  transform:translate3d(var(--px,0px),var(--py,0px),0);
   background:url('frames/bouquet-peony.png') left bottom / contain no-repeat;}
-.cover .floral--br{bottom:0;right:0;left:auto;width:46%;height:236px;z-index:1;
+.cover .floral--br{bottom:0;right:0;left:auto;width:46%;height:236px;z-index:1;will-change:transform;
+  transform:translate3d(var(--px,0px),var(--py,0px),0);
   background:url('frames/corner-gardenia.png') right bottom / contain no-repeat;}
 
 /* ---------- BINGKAI FOTO MEMPELAI (frame-cincin) ---------- */
