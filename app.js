@@ -260,3 +260,121 @@
     onScroll();
   })();
 })();
+/* ============================================================
+   BACKGROUND SINEMATIK — scroll-scrub 300 frame (cine/)
+   Awan -> pelaminan putih, "diputar" oleh posisi scroll.
+   + tilt parallax (pointer/gyro) + idle drift halus.
+   ============================================================ */
+(function cinematic() {
+  'use strict';
+  var canvas = document.getElementById('cine');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d', { alpha: false });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var TOTAL = 300, BASE = 'cine/ezgif-frame-', EXT = '.jpg';
+  var imgs = new Array(TOTAL);
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function pad3(n) { n = '' + n; while (n.length < 3) n = '0' + n; return n; }
+  function srcOf(i) { return encodeURI(BASE + pad3(i + 1) + EXT); }
+
+  /* ---- ukuran kanvas ---- */
+  function resize() {
+    var w = window.innerWidth, h = window.innerHeight;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    lastDrawn = -1; draw(curFrame);
+  }
+
+  /* ---- gambar (cover-fit, ambil frame terdekat yang sudah termuat) ---- */
+  var lastDrawn = -1;
+  function pick(idx) {
+    var im = imgs[idx], j;
+    if (im && im.complete && im.naturalWidth) return im;
+    for (j = idx; j >= 0; j--) { im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; }
+    for (j = idx; j < TOTAL; j++) { im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; }
+    return null;
+  }
+  function draw(f) {
+    var idx = Math.max(0, Math.min(TOTAL - 1, Math.round(f)));
+    var im = pick(idx);
+    if (!im) return;
+    if (idx === lastDrawn && im === lastIm) return;
+    lastDrawn = idx; lastIm = im;
+    var cw = canvas.width, ch = canvas.height;
+    var iw = im.naturalWidth, ih = im.naturalHeight;
+    var s = Math.max(cw / iw, ch / ih);
+    var w = iw * s, h = ih * s;
+    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
+  }
+  var lastIm = null;
+
+  /* ---- frame target dari scroll ---- */
+  var curFrame = 0, tgtFrame = 0;
+  function fromScroll() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? (window.pageYOffset || document.documentElement.scrollTop) / max : 0;
+    tgtFrame = Math.max(0, Math.min(1, p)) * (TOTAL - 1);
+  }
+
+  /* ---- tilt parallax (pointer + giroskop) ---- */
+  var ptx = 0, pty = 0, ctx2 = 0, cty = 0, AMP = 20;
+  if (!reduce) {
+    window.addEventListener('pointermove', function (e) {
+      ptx = (e.clientX / window.innerWidth - 0.5) * 2;
+      pty = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+    window.addEventListener('deviceorientation', function (e) {
+      if (e.gamma == null || e.beta == null) return;
+      ptx = Math.max(-1, Math.min(1, e.gamma / 26));
+      pty = Math.max(-1, Math.min(1, (e.beta - 45) / 26));
+    }, true);
+  }
+
+  /* ---- loop utama (scrub + tilt + idle) ---- */
+  var running = true;
+  function tick(t) {
+    if (!running) return;
+    // scrub frame (easing)
+    fromScroll();
+    curFrame += (tgtFrame - curFrame) * 0.12;
+    if (Math.abs(tgtFrame - curFrame) < 0.04) curFrame = tgtFrame;
+    draw(curFrame);
+    // tilt + idle drift
+    if (!reduce) {
+      var idleX = Math.sin(t / 4600) * 0.45, idleY = Math.cos(t / 6100) * 0.4;
+      var gx = ptx + idleX, gy = pty + idleY;
+      ctx2 += (gx - ctx2) * 0.05; cty += (gy - cty) * 0.05;
+      canvas.style.transform = 'scale(1.08) translate3d(' + (ctx2 * AMP).toFixed(2) + 'px,' + (cty * AMP).toFixed(2) + 'px,0)';
+    }
+    requestAnimationFrame(tick);
+  }
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(tick);
+  });
+
+  /* ---- preload progresif (frame awal diprioritaskan) ---- */
+  function preload() {
+    var started = 0, CONC = 8;
+    function next() {
+      if (started >= TOTAL) return;
+      var idx = started++;
+      var im = new Image();
+      im.decoding = 'async';
+      im.onload = im.onerror = function () {
+        if (idx <= Math.ceil(curFrame) + 2) { lastDrawn = -1; draw(curFrame); }
+        next();
+      };
+      im.src = srcOf(idx);
+      imgs[idx] = im;
+    }
+    for (var k = 0; k < CONC; k++) next();
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  preload();
+  requestAnimationFrame(tick);
+})();

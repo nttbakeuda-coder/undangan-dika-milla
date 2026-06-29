@@ -399,3 +399,75 @@ body.locked{overflow:hidden;height:100vh;}
   .pframe{width:min(60vw,168px);}
   .section::after{width:104px;height:104px;}
 }
+
+/* ============================================================
+   TEMA PUTIH SINEMATIK — background scroll-scrub (cine/) + kaca
+   (override paling akhir, menang atas aturan sebelumnya)
+   ============================================================ */
+html{background:#0b0e14;}
+body{background:transparent;}
+body.locked{overflow:hidden;height:100dvh;}
+
+/* kanvas film + scrim gelap lembut untuk keterbacaan */
+.cine{position:fixed;inset:0;width:100vw;height:100dvh;z-index:-2;display:block;
+  background:#0b0e14;transform:scale(1.08);transform-origin:center;will-change:transform;backface-visibility:hidden;}
+.cine-scrim{position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(8,12,20,.5) 0%,rgba(8,12,20,0) 22%,rgba(8,12,20,0) 60%,rgba(10,12,22,.5) 100%);}
+
+/* matikan seluruh dekorasi bunga krem tema lama */
+.floral,.cover__pelaminan,.section::after,.closing::before,.petals,.amp-orn{display:none!important;}
+
+/* kolom transparan agar film terlihat */
+.invitation{background:transparent!important;box-shadow:none!important;max-width:none!important;overflow:visible!important;
+  opacity:1;transition:opacity .9s var(--ease);}
+/* sembunyikan konten selama cover masih tertutup (cegah tembus pandang) */
+body.locked .invitation{opacity:0;pointer-events:none;}
+
+/* tiap bagian = kartu kaca putih melayang di atas film */
+.section{position:relative;z-index:1;width:calc(100% - 30px);max-width:430px;margin:48px auto;
+  padding:38px 26px!important;text-align:center;overflow:hidden;
+  background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);
+  border:1px solid rgba(255,255,255,.7);border-radius:26px;
+  box-shadow:0 36px 70px -34px rgba(8,12,30,.62),0 1px 0 rgba(255,255,255,.6) inset;}
+.section--tight{padding:32px 26px!important;}
+.invitation > .section:first-of-type{margin-top:13dvh;}
+.footer{margin:54px auto 0;}
+
+/* netralkan latar khusus (ayat/countdown/rsvp) -> ikut kaca putih */
+.section.ayat,.section.countdown,.section.rsvp{background:rgba(255,255,255,.72)!important;color:var(--ink);}
+.countdown .eyebrow{color:var(--terra);}
+.countdown .s-title{color:var(--ink);}
+.countdown .s-title em{color:var(--terra);}
+.countdown .cd-cell{background:rgba(120,90,60,.08);border:1px solid rgba(120,90,60,.16);}
+.countdown .cd-num{color:var(--ink);}
+.countdown .cd-lbl{color:var(--ink-2);}
+.countdown .cd-done{color:var(--ink);}
+.countdown .btn--ghost{color:var(--terra);border-color:var(--line-2);}
+.countdown .btn--ghost:hover{background:rgba(192,87,59,.08);}
+
+/* footer jadi kartu kaca gelap lembut */
+.footer{width:calc(100% - 30px);max-width:430px;border-radius:26px 26px 0 0;
+  background:rgba(18,16,28,.46);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  color:rgba(255,255,255,.92);box-shadow:0 -10px 40px -20px rgba(0,0,0,.5);}
+.footer__names{color:#fff;}
+
+/* ---------- COVER di atas langit (frame awal) ---------- */
+.cover{background:transparent!important;box-shadow:none!important;}
+.cover::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(130% 80% at 50% 64%,rgba(8,12,22,.55),rgba(8,12,22,.08) 70%);}
+.cover__inner{z-index:2;}
+.cover__eyebrow{color:rgba(255,255,255,.92);}
+.cover__names{color:#fff;text-shadow:0 8px 34px rgba(0,0,0,.55);}
+.cover__amp{color:#f1dcae;}
+.cover__date{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);}
+.cover__to .lbl{color:rgba(255,255,255,.82);}
+.cover__to .guest{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.5);}
+.cover__btn{background:rgba(255,255,255,.94)!important;color:#7a4030!important;
+  box-shadow:0 16px 34px -16px rgba(0,0,0,.6)!important;}
+.cover__btn:hover{background:#fff!important;}
+
+/* hormati reduce-motion: film tetap (tanpa scrub berlebih ditangani di JS) */
+@media (prefers-reduced-motion:reduce){
+  .cine{transform:none;}
+}
