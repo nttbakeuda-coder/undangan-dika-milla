@@ -260,124 +260,88 @@
     onScroll();
   })();
 })();
+
 /* ============================================================
-   BACKGROUND SINEMATIK — scroll-scrub 300 frame (cine/)
-   Awan -> pelaminan putih, "diputar" oleh posisi scroll.
-   + tilt parallax (pointer/gyro) + idle drift halus.
+   BACKGROUND PARALLAX BERLAPIS — komposisi aset PNG (bgw/)
+   Bingkai bunga putih berkedalaman: langit+awan di tengah,
+   garland/arch/chandelier/wisteria di atas, pilar/pohon/semak
+   di sisi, border mawar + buket di bawah.
+   Gerak: tilt (pointer/gyro) + scroll parallax + idle sway.
    ============================================================ */
-(function cinematic() {
+(function bg3d() {
   'use strict';
-  var canvas = document.getElementById('cine');
-  if (!canvas || !canvas.getContext) return;
-  var ctx = canvas.getContext('2d', { alpha: false });
+  var scene = document.getElementById('bg3dScene');
+  if (!scene) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var TOTAL = 300, BASE = 'cine/ezgif-frame-', EXT = '.jpg';
-  var imgs = new Array(TOTAL);
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  // konfigurasi layer (belakang -> depan). d=kekuatan parallax, s=sway px, b=blur
+  var L = [
+    { n: 16, css: 'left:-8%;top:2%;width:50%',                 d: .05, o: .8,  s: 9,  b: 1.2 },
+    { n: 19, css: 'right:-8%;top:0%;width:52%', f: 1,          d: .05, o: .8,  s: 10, b: 1.2 },
+    { n: 13, css: 'left:6%;top:22%;width:46%',                 d: .08, o: .62, s: 12, b: 1 },
+    { n: 24, css: 'right:2%;top:28%;width:44%', f: 1,          d: .08, o: .5,  s: 13, b: 1 },
+    { n: 56, css: 'left:-5%;bottom:-3%;width:26%',             d: .12, o: .95, s: 5 },
+    { n: 46, css: 'right:-7%;bottom:-4%;width:36%', f: 1,      d: .12, o: .95, s: 6 },
+    { n: 30, css: 'left:50%;top:-7%;width:72%;margin-left:-36%', d: .16, o: 1, s: 6 },
+    { n: 5,  css: 'left:-10%;top:-5%;width:42%',               d: .18, o: 1,  s: 5 },
+    { n: 5,  css: 'right:-10%;top:-5%;width:42%', f: 1,        d: .18, o: 1,  s: 5 },
+    { n: 33, css: 'left:50%;top:-5%;width:52%;margin-left:-26%', d: .2, o: .95, s: 8 },
+    { n: 31, css: 'left:50%;top:-3%;width:26%;margin-left:-13%', d: .22, o: .9, s: 4 },
+    { n: 44, css: 'left:-3%;bottom:-2%;width:23%',             d: .3,  o: 1,  s: 3 },
+    { n: 40, css: 'right:-3%;bottom:-2%;width:23%', f: 1,      d: .3,  o: 1,  s: 3 },
+    { n: 57, css: 'left:-7%;bottom:-4%;width:36%',             d: .42, o: 1,  s: 4 },
+    { n: 53, css: 'right:-7%;bottom:-4%;width:32%', f: 1,      d: .42, o: 1,  s: 4 },
+    { n: 55, css: 'left:16%;bottom:-2%;width:28%',             d: .5,  o: .92, s: 7 },
+    { n: 85, css: 'left:-7%;bottom:-5%;width:34%',             d: .62, o: 1,  s: 5, r: .6 },
+    { n: 79, css: 'right:-5%;bottom:-5%;width:28%', f: 1,      d: .62, o: 1,  s: 5, r: .6 },
+    { n: 67, css: 'left:-2%;bottom:-3%;width:104%',            d: .8,  o: 1,  s: 3 }
+  ];
 
-  function pad3(n) { n = '' + n; while (n.length < 3) n = '0' + n; return n; }
-  function srcOf(i) { return encodeURI(BASE + pad3(i + 1) + EXT); }
-
-  /* ---- ukuran kanvas ---- */
-  function resize() {
-    var w = window.innerWidth, h = window.innerHeight;
-    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-    lastDrawn = -1; draw(curFrame);
-  }
-
-  /* ---- gambar (cover-fit, ambil frame terdekat yang sudah termuat) ---- */
-  var lastDrawn = -1;
-  function pick(idx) {
-    var im = imgs[idx], j;
-    if (im && im.complete && im.naturalWidth) return im;
-    for (j = idx; j >= 0; j--) { im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; }
-    for (j = idx; j < TOTAL; j++) { im = imgs[j]; if (im && im.complete && im.naturalWidth) return im; }
-    return null;
-  }
-  function draw(f) {
-    var idx = Math.max(0, Math.min(TOTAL - 1, Math.round(f)));
-    var im = pick(idx);
-    if (!im) return;
-    if (idx === lastDrawn && im === lastIm) return;
-    lastDrawn = idx; lastIm = im;
-    var cw = canvas.width, ch = canvas.height;
-    var iw = im.naturalWidth, ih = im.naturalHeight;
-    var s = Math.max(cw / iw, ch / ih);
-    var w = iw * s, h = ih * s;
-    ctx.drawImage(im, (cw - w) / 2, (ch - h) / 2, w, h);
-  }
-  var lastIm = null;
-
-  /* ---- frame target dari scroll ---- */
-  var curFrame = 0, tgtFrame = 0;
-  function fromScroll() {
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    var p = max > 0 ? (window.pageYOffset || document.documentElement.scrollTop) / max : 0;
-    tgtFrame = Math.max(0, Math.min(1, p)) * (TOTAL - 1);
-  }
-
-  /* ---- tilt parallax (pointer + giroskop) ---- */
-  var ptx = 0, pty = 0, ctx2 = 0, cty = 0, AMP = 20;
-  if (!reduce) {
-    window.addEventListener('pointermove', function (e) {
-      ptx = (e.clientX / window.innerWidth - 0.5) * 2;
-      pty = (e.clientY / window.innerHeight - 0.5) * 2;
-    }, { passive: true });
-    window.addEventListener('deviceorientation', function (e) {
-      if (e.gamma == null || e.beta == null) return;
-      ptx = Math.max(-1, Math.min(1, e.gamma / 26));
-      pty = Math.max(-1, Math.min(1, (e.beta - 45) / 26));
-    }, true);
-  }
-
-  /* ---- loop utama (scrub + tilt + idle) ---- */
-  var running = true;
-  function tick(t) {
-    if (!running) return;
-    // scrub frame (easing)
-    fromScroll();
-    curFrame += (tgtFrame - curFrame) * 0.12;
-    if (Math.abs(tgtFrame - curFrame) < 0.04) curFrame = tgtFrame;
-    draw(curFrame);
-    // tilt + idle drift
-    if (!reduce) {
-      var idleX = Math.sin(t / 4600) * 0.45, idleY = Math.cos(t / 6100) * 0.4;
-      var gx = ptx + idleX, gy = pty + idleY;
-      ctx2 += (gx - ctx2) * 0.05; cty += (gy - cty) * 0.05;
-      canvas.style.transform = 'scale(1.08) translate3d(' + (ctx2 * AMP).toFixed(2) + 'px,' + (cty * AMP).toFixed(2) + 'px,0)';
-    }
-    requestAnimationFrame(tick);
-  }
-  document.addEventListener('visibilitychange', function () {
-    running = !document.hidden;
-    if (running) requestAnimationFrame(tick);
+  var layers = [];
+  L.forEach(function (c, i) {
+    var img = document.createElement('img');
+    img.src = encodeURI('bgw/' + c.n + '.png');
+    img.alt = ''; img.decoding = 'async'; img.loading = i < 8 ? 'eager' : 'lazy';
+    img.className = 'bg3d__l';
+    img.style.cssText = c.css + ';opacity:' + (c.o == null ? 1 : c.o) +
+      (c.b ? ';filter:blur(' + c.b + 'px)' : '') + ';z-index:' + i;
+    scene.appendChild(img);
+    layers.push({ el: img, d: c.d, s: c.s || 0, f: c.f ? -1 : 1, r: c.r || 0, ph: i * 1.7 });
   });
 
-  /* ---- preload progresif (frame awal diprioritaskan) ---- */
-  function preload() {
-    var started = 0, CONC = 8;
-    function next() {
-      if (started >= TOTAL) return;
-      var idx = started++;
-      var im = new Image();
-      im.decoding = 'async';
-      im.onload = im.onerror = function () {
-        if (idx <= Math.ceil(curFrame) + 2) { lastDrawn = -1; draw(curFrame); }
-        next();
-      };
-      im.src = srcOf(idx);
-      imgs[idx] = im;
+  if (reduce) return; // statis untuk reduce-motion
+
+  /* ---- input ---- */
+  var ptx = 0, pty = 0, cpx = 0, cpy = 0, sy = 0;
+  window.addEventListener('pointermove', function (e) {
+    ptx = (e.clientX / window.innerWidth - 0.5) * 2;
+    pty = (e.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+  window.addEventListener('deviceorientation', function (e) {
+    if (e.gamma == null || e.beta == null) return;
+    ptx = Math.max(-1, Math.min(1, e.gamma / 26));
+    pty = Math.max(-1, Math.min(1, (e.beta - 45) / 26));
+  }, true);
+  window.addEventListener('scroll', function () { sy = window.pageYOffset || document.documentElement.scrollTop || 0; }, { passive: true });
+
+  var PX = 30, PY = 22, SK = 0.10, run = true;
+  function frame(t) {
+    if (!run) return;
+    cpx += (ptx - cpx) * 0.06; cpy += (pty - cpy) * 0.06;
+    for (var i = 0; i < layers.length; i++) {
+      var L2 = layers[i];
+      var tx = cpx * L2.d * PX;
+      var ty = cpy * L2.d * PY - sy * L2.d * SK + Math.sin(t * 0.0006 + L2.ph) * L2.s;
+      var tr = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0)';
+      if (L2.r) tr += ' rotate(' + (Math.sin(t * 0.0005 + L2.ph) * L2.r).toFixed(3) + 'deg)';
+      if (L2.f < 0) tr += ' scaleX(-1)';
+      L2.el.style.transform = tr;
     }
-    for (var k = 0; k < CONC; k++) next();
+    requestAnimationFrame(frame);
   }
-
-  window.addEventListener('resize', resize, { passive: true });
-  resize();
-  preload();
-  requestAnimationFrame(tick);
+  document.addEventListener('visibilitychange', function () {
+    run = !document.hidden; if (run) requestAnimationFrame(frame);
+  });
+  requestAnimationFrame(frame);
 })();
-
-
 
