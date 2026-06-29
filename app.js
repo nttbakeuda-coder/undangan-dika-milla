@@ -172,7 +172,7 @@
 
   /* ---------------- Kelopak bunga berjatuhan ---------------- */
   var petalLayer = null, petalTimer = null;
-  var PETAL_COLORS = ['#D9805C', '#E9A87C', '#F3CDA8', '#C0573B', '#F2D9BE'];
+  var PETAL_COLORS = ['#ffffff', '#fbf4ea', '#f4ece1', '#eef3f7', '#fff8ef'];
   function petalSVG(color) {
     return '<svg width="100%" height="100%" viewBox="0 0 24 30">'
       + '<path d="M12 0C5 7 2 15 6 23c2 4 6 7 6 7s4-3 6-7c4-8 1-16-6-23Z" fill="' + color + '" opacity="0.85"/>'
@@ -274,27 +274,22 @@
   if (!scene) return;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // konfigurasi layer (belakang -> depan). d=kekuatan parallax, s=sway px, b=blur
+  // ALTAR PELAMINAN simetris (belakang -> depan). d=parallax, s=sway px, b=blur
   var L = [
-    { n: 16, css: 'left:-8%;top:2%;width:50%',                 d: .05, o: .8,  s: 9,  b: 1.2 },
-    { n: 19, css: 'right:-8%;top:0%;width:52%', f: 1,          d: .05, o: .8,  s: 10, b: 1.2 },
-    { n: 13, css: 'left:6%;top:22%;width:46%',                 d: .08, o: .62, s: 12, b: 1 },
-    { n: 24, css: 'right:2%;top:28%;width:44%', f: 1,          d: .08, o: .5,  s: 13, b: 1 },
-    { n: 56, css: 'left:-5%;bottom:-3%;width:26%',             d: .12, o: .95, s: 5 },
-    { n: 46, css: 'right:-7%;bottom:-4%;width:36%', f: 1,      d: .12, o: .95, s: 6 },
-    { n: 30, css: 'left:50%;top:-7%;width:72%;margin-left:-36%', d: .16, o: 1, s: 6 },
-    { n: 5,  css: 'left:-10%;top:-5%;width:42%',               d: .18, o: 1,  s: 5 },
-    { n: 5,  css: 'right:-10%;top:-5%;width:42%', f: 1,        d: .18, o: 1,  s: 5 },
-    { n: 33, css: 'left:50%;top:-5%;width:52%;margin-left:-26%', d: .2, o: .95, s: 8 },
-    { n: 31, css: 'left:50%;top:-3%;width:26%;margin-left:-13%', d: .22, o: .9, s: 4 },
-    { n: 44, css: 'left:-3%;bottom:-2%;width:23%',             d: .3,  o: 1,  s: 3 },
-    { n: 40, css: 'right:-3%;bottom:-2%;width:23%', f: 1,      d: .3,  o: 1,  s: 3 },
-    { n: 57, css: 'left:-7%;bottom:-4%;width:36%',             d: .42, o: 1,  s: 4 },
-    { n: 53, css: 'right:-7%;bottom:-4%;width:32%', f: 1,      d: .42, o: 1,  s: 4 },
-    { n: 55, css: 'left:16%;bottom:-2%;width:28%',             d: .5,  o: .92, s: 7 },
-    { n: 85, css: 'left:-7%;bottom:-5%;width:34%',             d: .62, o: 1,  s: 5, r: .6 },
-    { n: 79, css: 'right:-5%;bottom:-5%;width:28%', f: 1,      d: .62, o: 1,  s: 5, r: .6 },
-    { n: 67, css: 'left:-2%;bottom:-3%;width:104%',            d: .8,  o: 1,  s: 3 }
+    { n: 3,  css: 'left:-6%;top:-6%;width:112%;height:112%;object-fit:cover;filter:none', d: .03, o: 1, s: 0 }, // langit
+    { n: 2,  css: 'left:0%;top:5%;width:44%',                    d: .07, o: .5,  s: 16, b: 1 },   // awan kiri
+    { n: 2,  css: 'right:-2%;top:12%;width:40%', f: 1,           d: .06, o: .42, s: 18, b: 1 },   // awan kanan
+    { n: 57, css: 'left:-13%;top:-9%;width:58%',                 d: .1,  o: .97, s: 5 },          // pohon putih kiri
+    { n: 57, css: 'right:-13%;top:-9%;width:58%', f: 1,          d: .1,  o: .97, s: 5 },          // pohon putih kanan
+    { n: 30, css: 'left:50%;top:-9%;width:120%;margin-left:-60%', d: .14, o: 1, s: 6 },           // garland wisteria atas
+    { n: 33, css: 'left:50%;top:-8%;width:44%;margin-left:-22%', d: .17, o: .9,  s: 10 },         // wisteria tengah
+    { n: 67, css: 'left:-6%;bottom:3%;width:112%',              d: .26, o: 1,  s: 2 },           // pagar rumput (ground)
+    { n: 9,  css: 'left:-3%;bottom:-2%;width:25%',              d: .3,  o: 1,  s: 3 },           // pot bunga kiri
+    { n: 9,  css: 'right:-3%;bottom:-2%;width:25%', f: 1,       d: .3,  o: 1,  s: 3 },           // pot bunga kanan
+    { n: 10, css: 'left:50%;bottom:-2%;width:56%;margin-left:-28%', d: .34, o: 1, s: 2 },        // sofa pelaminan
+    { n: 94, css: 'left:-6%;bottom:-5%;width:112%',            d: .5,  o: 1,  s: 3 },           // deretan semak depan
+    { n: 53, css: 'left:-9%;bottom:-6%;width:36%',             d: .62, o: 1,  s: 4 },           // semak depan kiri
+    { n: 53, css: 'right:-9%;bottom:-6%;width:36%', f: 1,      d: .62, o: 1,  s: 4 }            // semak depan kanan
   ];
 
   var layers = [];
@@ -345,3 +340,7 @@
   requestAnimationFrame(frame);
 })();
 
+
+/*DEV*/ if(new URLSearchParams(location.search).has("open")){var _b=document.getElementById("openBtn");if(_b)_b.click();Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(e){e.classList.add("in");});}
+
+/*DEV*/ if(new URLSearchParams(location.search).has("open")){var _b=document.getElementById("openBtn");if(_b)_b.click();Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(e){e.classList.add("in");});}

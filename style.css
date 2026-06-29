@@ -415,7 +415,8 @@ body.locked{overflow:hidden;height:100dvh;}
   background:linear-gradient(180deg,rgba(8,12,20,.5) 0%,rgba(8,12,20,0) 22%,rgba(8,12,20,0) 60%,rgba(10,12,22,.5) 100%);}
 
 /* matikan seluruh dekorasi bunga krem tema lama */
-.floral,.cover__pelaminan,.section::after,.closing::before,.petals,.amp-orn{display:none!important;}
+.floral,.cover__pelaminan,.section::after,.closing::before,.amp-orn{display:none!important;}
+.petals{z-index:40;}
 
 /* kolom transparan agar film terlihat */
 .invitation{background:transparent!important;box-shadow:none!important;max-width:none!important;overflow:visible!important;
@@ -494,12 +495,17 @@ html{background:#e7edf2;}
 .bg3d{position:fixed;inset:0;width:100vw;height:100dvh;z-index:-2;overflow:hidden;
   perspective:1100px;
   background:linear-gradient(180deg,#c7ddf0 0%,#dfeaf2 28%,#eef0ea 58%,#f3ebdd 82%,#ecdfce 100%);}
-.bg3d__scene{position:absolute;inset:0;transform:scale(1.08);transform-style:preserve-3d;}
+.bg3d__scene{position:absolute;inset:0;transform-style:preserve-3d;
+  animation:kenburns 28s ease-in-out infinite alternate;will-change:transform;}
+@keyframes kenburns{from{transform:scale(1.05) translateY(0)}to{transform:scale(1.13) translateY(-2%)}}
 .bg3d__l{position:absolute;display:block;pointer-events:none;height:auto;max-width:none;
   will-change:transform;backface-visibility:hidden;
-  filter:drop-shadow(0 18px 26px rgba(80,90,110,.18));}
-/* scrim diredupkan agar bunga putih tetap cerah */
+  filter:drop-shadow(0 16px 24px rgba(70,80,100,.16));}
+/* kabut lembut di tengah agar teks terbaca + kesan dreamy */
+.bg3d::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(72% 56% at 50% 40%, rgba(255,255,255,.42), rgba(255,255,255,.1) 56%, rgba(255,255,255,0) 76%);}
 .cine-scrim{display:none;}
+@media (prefers-reduced-motion:reduce){ .bg3d__scene{animation:none;transform:scale(1.06);} }
 
 /* cover di atas langit terang -> teks gelap elegan */
 .cover::before{display:none;}
