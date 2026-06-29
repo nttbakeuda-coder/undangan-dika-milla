@@ -172,7 +172,7 @@
 
   /* ---------------- Kelopak bunga berjatuhan ---------------- */
   var petalLayer = null, petalTimer = null;
-  var PETAL_COLORS = ['#ffffff', '#fbf4ea', '#f4ece1', '#eef3f7', '#fff8ef'];
+  var PETAL_COLORS = ['#D9805C', '#E9A87C', '#F3CDA8', '#C0573B', '#F2D9BE'];
   function petalSVG(color) {
     return '<svg width="100%" height="100%" viewBox="0 0 24 30">'
       + '<path d="M12 0C5 7 2 15 6 23c2 4 6 7 6 7s4-3 6-7c4-8 1-16-6-23Z" fill="' + color + '" opacity="0.85"/>'
@@ -260,87 +260,3 @@
     onScroll();
   })();
 })();
-
-/* ============================================================
-   BACKGROUND PARALLAX BERLAPIS — komposisi aset PNG (bgw/)
-   Bingkai bunga putih berkedalaman: langit+awan di tengah,
-   garland/arch/chandelier/wisteria di atas, pilar/pohon/semak
-   di sisi, border mawar + buket di bawah.
-   Gerak: tilt (pointer/gyro) + scroll parallax + idle sway.
-   ============================================================ */
-(function bg3d() {
-  'use strict';
-  var scene = document.getElementById('bg3dScene');
-  if (!scene) return;
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ALTAR PELAMINAN simetris (belakang -> depan). d=parallax, s=sway px, b=blur
-  var L = [
-    { n: 3,  css: 'left:-6%;top:-6%;width:112%;height:112%;object-fit:cover;filter:none', d: .03, o: 1, s: 0 }, // langit
-    { n: 2,  css: 'left:0%;top:5%;width:44%',                    d: .07, o: .5,  s: 16, b: 1 },   // awan kiri
-    { n: 2,  css: 'right:-2%;top:12%;width:40%', f: 1,           d: .06, o: .42, s: 18, b: 1 },   // awan kanan
-    { n: 57, css: 'left:-13%;top:-9%;width:58%',                 d: .1,  o: .97, s: 5 },          // pohon putih kiri
-    { n: 57, css: 'right:-13%;top:-9%;width:58%', f: 1,          d: .1,  o: .97, s: 5 },          // pohon putih kanan
-    { n: 30, css: 'left:50%;top:-9%;width:120%;margin-left:-60%', d: .14, o: 1, s: 6 },           // garland wisteria atas
-    { n: 33, css: 'left:50%;top:-8%;width:44%;margin-left:-22%', d: .17, o: .9,  s: 10 },         // wisteria tengah
-    { n: 67, css: 'left:-6%;bottom:3%;width:112%',              d: .26, o: 1,  s: 2 },           // pagar rumput (ground)
-    { n: 9,  css: 'left:-3%;bottom:-2%;width:25%',              d: .3,  o: 1,  s: 3 },           // pot bunga kiri
-    { n: 9,  css: 'right:-3%;bottom:-2%;width:25%', f: 1,       d: .3,  o: 1,  s: 3 },           // pot bunga kanan
-    { n: 10, css: 'left:50%;bottom:-2%;width:56%;margin-left:-28%', d: .34, o: 1, s: 2 },        // sofa pelaminan
-    { n: 94, css: 'left:-6%;bottom:-5%;width:112%',            d: .5,  o: 1,  s: 3 },           // deretan semak depan
-    { n: 53, css: 'left:-9%;bottom:-6%;width:36%',             d: .62, o: 1,  s: 4 },           // semak depan kiri
-    { n: 53, css: 'right:-9%;bottom:-6%;width:36%', f: 1,      d: .62, o: 1,  s: 4 }            // semak depan kanan
-  ];
-
-  var layers = [];
-  L.forEach(function (c, i) {
-    var img = document.createElement('img');
-    img.src = encodeURI('bgw/' + c.n + '.png');
-    img.alt = ''; img.decoding = 'async'; img.loading = i < 8 ? 'eager' : 'lazy';
-    img.className = 'bg3d__l';
-    img.style.cssText = c.css + ';opacity:' + (c.o == null ? 1 : c.o) +
-      (c.b ? ';filter:blur(' + c.b + 'px)' : '') + ';z-index:' + i;
-    scene.appendChild(img);
-    layers.push({ el: img, d: c.d, s: c.s || 0, f: c.f ? -1 : 1, r: c.r || 0, ph: i * 1.7 });
-  });
-
-  if (reduce) return; // statis untuk reduce-motion
-
-  /* ---- input ---- */
-  var ptx = 0, pty = 0, cpx = 0, cpy = 0, sy = 0;
-  window.addEventListener('pointermove', function (e) {
-    ptx = (e.clientX / window.innerWidth - 0.5) * 2;
-    pty = (e.clientY / window.innerHeight - 0.5) * 2;
-  }, { passive: true });
-  window.addEventListener('deviceorientation', function (e) {
-    if (e.gamma == null || e.beta == null) return;
-    ptx = Math.max(-1, Math.min(1, e.gamma / 26));
-    pty = Math.max(-1, Math.min(1, (e.beta - 45) / 26));
-  }, true);
-  window.addEventListener('scroll', function () { sy = window.pageYOffset || document.documentElement.scrollTop || 0; }, { passive: true });
-
-  var PX = 30, PY = 22, SK = 0.10, run = true;
-  function frame(t) {
-    if (!run) return;
-    cpx += (ptx - cpx) * 0.06; cpy += (pty - cpy) * 0.06;
-    for (var i = 0; i < layers.length; i++) {
-      var L2 = layers[i];
-      var tx = cpx * L2.d * PX;
-      var ty = cpy * L2.d * PY - sy * L2.d * SK + Math.sin(t * 0.0006 + L2.ph) * L2.s;
-      var tr = 'translate3d(' + tx.toFixed(2) + 'px,' + ty.toFixed(2) + 'px,0)';
-      if (L2.r) tr += ' rotate(' + (Math.sin(t * 0.0005 + L2.ph) * L2.r).toFixed(3) + 'deg)';
-      if (L2.f < 0) tr += ' scaleX(-1)';
-      L2.el.style.transform = tr;
-    }
-    requestAnimationFrame(frame);
-  }
-  document.addEventListener('visibilitychange', function () {
-    run = !document.hidden; if (run) requestAnimationFrame(frame);
-  });
-  requestAnimationFrame(frame);
-})();
-
-
-/*DEV*/ if(new URLSearchParams(location.search).has("open")){var _b=document.getElementById("openBtn");if(_b)_b.click();Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(e){e.classList.add("in");});}
-
-/*DEV*/ if(new URLSearchParams(location.search).has("open")){var _b=document.getElementById("openBtn");if(_b)_b.click();Array.prototype.forEach.call(document.querySelectorAll(".reveal"),function(e){e.classList.add("in");});}
